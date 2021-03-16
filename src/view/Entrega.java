@@ -1,14 +1,16 @@
 package view;
 
 import controller.Cozinha;
-import model.Segundos;
+
+import java.util.concurrent.Semaphore;
+
 
 public class Entrega {
     public static void main(String[] args) {
-//        Cozinha c=new Cozinha(2);
-//        c.start();
-        long nano=System.nanoTime();
-        Segundos s=new Segundos(nano);
-        s.start();
+        Semaphore semaforo = new Semaphore(1);
+        for (int i = 0; i < 5; i++) {
+            Cozinha prato = new Cozinha(i, semaforo);
+            prato.start();
+        }
     }
 }
